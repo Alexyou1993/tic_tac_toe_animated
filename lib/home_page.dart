@@ -117,6 +117,7 @@ class _HomePageState extends State<HomePage> {
     } else if (filledBoxes == 9 && !_check) {
       _showDrawDialog();
     }
+    return false;
   }
 
   void _showWinDialog(String winner) {
