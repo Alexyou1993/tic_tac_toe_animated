@@ -1,7 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:assets_audio_player/assets_audio_player.dart';
 import 'main.dart';
+
+
 
 class HomePage extends StatefulWidget {
   @override
@@ -115,6 +118,7 @@ class _HomePageState extends State<HomePage> {
       });
       _showWinDialog(displayXo[2]);
     } else if (filledBoxes == 9 && !_check) {
+      _soundTie();
       _showDrawDialog();
     }
     return false;
@@ -145,10 +149,12 @@ class _HomePageState extends State<HomePage> {
         });
     if (winner == 'o') {
       setState(() {
+        _soundWinner();
         pointsO += 1;
       });
     } else if (winner == 'x') {
       setState(() {
+        _soundWinner();
         pointsX += 1;
       });
     }
@@ -186,6 +192,16 @@ class _HomePageState extends State<HomePage> {
             ],
           );
         });
+  }
+
+  void _soundWinner() {
+    final AssetsAudioPlayer assetsAudioPlayer = AssetsAudioPlayer();
+    assetsAudioPlayer.open(Audio('assets/audio/808.wav'));
+  }
+
+  void _soundTie() {
+    final AssetsAudioPlayer assetsAudioPlayer = AssetsAudioPlayer();
+    assetsAudioPlayer.open(Audio('assets/audio/openhat.wav'));
   }
 
   @override
