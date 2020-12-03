@@ -249,6 +249,7 @@ class _HomePageState extends State<HomePage> {
                   itemCount: 9,
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 3),
+                  physics: const NeverScrollableScrollPhysics(),
                   itemBuilder: (BuildContext context, int index) {
                     return GestureDetector(
                       onTap: () {
