@@ -22,17 +22,20 @@ class IntroScreen extends StatefulWidget {
   _IntroScreenState createState() => _IntroScreenState();
 }
 
-class _IntroScreenState extends State<IntroScreen> with SingleTickerProviderStateMixin{
-  static final TextStyle _myNewFont = GoogleFonts.pressStart2P(
-      textStyle: const TextStyle(
-        color: Colors.black,
-        letterSpacing: 3,
-      ));
-  static final TextStyle _myNewFontWhite = GoogleFonts.pressStart2P(
-      textStyle: const TextStyle(
-    color: Colors.white,
-    letterSpacing: 3,
-  ));
+class _IntroScreenState extends State<IntroScreen>
+    with SingleTickerProviderStateMixin {
+  static final TextStyle _myNewFont = GoogleFonts.pressStart2p(
+    textStyle: const TextStyle(
+      color: Colors.black,
+      letterSpacing: 3,
+    ),
+  );
+  static final TextStyle _myNewFontWhite = GoogleFonts.pressStart2p(
+    textStyle: const TextStyle(
+      color: Colors.white,
+      letterSpacing: 3,
+    ),
+  );
   bool showRed = false;
 
   @override
@@ -68,12 +71,11 @@ class _IntroScreenState extends State<IntroScreen> with SingleTickerProviderStat
                     startDelay: const Duration(seconds: 1),
                     child: Container(
                       decoration: BoxDecoration(
-                          border: Border.all(
-                            style: BorderStyle.none,
-                          ),
-                          shape: BoxShape.circle),
+                        border: Border.all(),
+                        shape: BoxShape.circle,
+                      ),
                       child: CircleAvatar(
-                        backgroundColor: Colors.grey[900],
+                        backgroundColor: Colors.grey,
                         child: Container(
                           child: Image.asset(
                             './assets/image/tictactoelogo.png',
@@ -102,11 +104,13 @@ class _IntroScreenState extends State<IntroScreen> with SingleTickerProviderStat
                 onTap: () {
                   Navigator.push<HomePage>(
                     context,
-                    MaterialPageRoute<HomePage>(builder: (BuildContext context) => HomePage()),
+                    MaterialPageRoute<HomePage>(
+                        builder: (BuildContext context) => HomePage()),
                   );
                 },
                 child: Padding(
-                  padding: const EdgeInsets.only(left: 40, right: 40, bottom: 60),
+                  padding:
+                      const EdgeInsets.only(left: 40, right: 40, bottom: 60),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(20),
                     child: Container(

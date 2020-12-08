@@ -4,26 +4,26 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:assets_audio_player/assets_audio_player.dart';
 import 'main.dart';
 
-
-
 class HomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
-  static final TextStyle _myNewFont = GoogleFonts.pressStart2P(
-      textStyle: const TextStyle(
-    color: Colors.black,
-    letterSpacing: 3,
-  ));
-  static final TextStyle _myNewFont1 = GoogleFonts.pressStart2P(
-      textStyle: const TextStyle(
-    color: Colors.black,
-    letterSpacing: 3,
-    fontSize: 16,
-  ));
-  static final TextStyle _myNewFontWhite = GoogleFonts.pressStart2P(
+  static final TextStyle _myNewFont = GoogleFonts.pressStart2p(
+    textStyle: const TextStyle(
+      color: Colors.black,
+      letterSpacing: 3,
+    ),
+  );
+  static final TextStyle _myNewFont1 = GoogleFonts.pressStart2p(
+    textStyle: const TextStyle(
+      color: Colors.black,
+      letterSpacing: 3,
+      fontSize: 16,
+    ),
+  );
+  static final TextStyle _myNewFontWhite = GoogleFonts.pressStart2p(
       textStyle: const TextStyle(
     color: Colors.white,
     letterSpacing: 3,
@@ -35,21 +35,27 @@ class _HomePageState extends State<HomePage> {
   int filledBoxes = 0;
 
   void _tapped(int index) {
-    setState(() {
-      if (onTurn && displayXo[index] == '') {
-        setState(() {
-          displayXo[index] = 'o';
-          filledBoxes += 1;
-        });
-      } else if (!onTurn && displayXo[index] == '') {
-        setState(() {
-          displayXo[index] = 'x';
-          filledBoxes += 1;
-        });
-      }
-      onTurn = !onTurn;
-      _checkWinner();
-    });
+    setState(
+      () {
+        if (onTurn && displayXo[index] == '') {
+          setState(
+            () {
+              displayXo[index] = 'o';
+              filledBoxes += 1;
+            },
+          );
+        } else if (!onTurn && displayXo[index] == '') {
+          setState(
+            () {
+              displayXo[index] = 'x';
+              filledBoxes += 1;
+            },
+          );
+        }
+        onTurn = !onTurn;
+        _checkWinner();
+      },
+    );
   }
 
   bool _checkWinner() {
@@ -57,65 +63,49 @@ class _HomePageState extends State<HomePage> {
     if (displayXo[0] == displayXo[1] &&
         displayXo[0] == displayXo[2] &&
         displayXo[0] != '') {
-      setState(() {
-        _check = true;
-      });
+      setState(() => _check = true);
       _showWinDialog(displayXo[0]);
     }
     if (displayXo[3] == displayXo[4] &&
         displayXo[3] == displayXo[5] &&
         displayXo[3] != '') {
-      setState(() {
-        _check = true;
-      });
+      setState(() => _check = true);
       _showWinDialog(displayXo[3]);
     }
     if (displayXo[6] == displayXo[7] &&
         displayXo[6] == displayXo[8] &&
         displayXo[6] != '') {
-      setState(() {
-        _check = true;
-      });
+      setState(() => _check = true);
       _showWinDialog(displayXo[6]);
     }
     if (displayXo[0] == displayXo[3] &&
         displayXo[0] == displayXo[6] &&
         displayXo[0] != '') {
-      setState(() {
-        _check = true;
-      });
+      setState(() => _check = true);
       _showWinDialog(displayXo[0]);
     }
     if (displayXo[1] == displayXo[4] &&
         displayXo[1] == displayXo[7] &&
         displayXo[1] != '') {
-      setState(() {
-        _check = true;
-      });
+      setState(() => _check = true);
       _showWinDialog(displayXo[1]);
     }
     if (displayXo[2] == displayXo[5] &&
         displayXo[2] == displayXo[8] &&
         displayXo[2] != '') {
-      setState(() {
-        _check = true;
-      });
+      setState(() => _check = true);
       _showWinDialog(displayXo[2]);
     }
     if (displayXo[0] == displayXo[4] &&
         displayXo[0] == displayXo[8] &&
         displayXo[0] != '') {
-      setState(() {
-        _check = true;
-      });
+      setState(() => _check = true);
       _showWinDialog(displayXo[0]);
     }
     if (displayXo[2] == displayXo[4] &&
         displayXo[2] == displayXo[6] &&
         displayXo[2] != '') {
-      setState(() {
-        _check = true;
-      });
+      setState(() => _check = true);
       _showWinDialog(displayXo[2]);
     } else if (filledBoxes == 9 && !_check) {
       _soundTie();
@@ -126,72 +116,82 @@ class _HomePageState extends State<HomePage> {
 
   void _showWinDialog(String winner) {
     showDialog<AlertDialog>(
-        barrierDismissible: false,
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: Text(
-              'Winner is: ' + winner,
-              style: _myNewFont1,
+      barrierDismissible: false,
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text(
+            'Winner is: ' + winner,
+            style: _myNewFont1,
+          ),
+          actions: <Widget>[
+            FlatButton(
+              child: Text(
+                'Play Again',
+                style: _myNewFont,
+              ),
+              onPressed: () {
+                _clearBoard();
+                Navigator.of(context).pop();
+              },
             ),
-            actions: <Widget>[
-              FlatButton(
-                  child: Text(
-                    'Play Again',
-                    style: _myNewFont,
-                  ),
-                  onPressed: () {
-                    _clearBoard();
-                    Navigator.of(context).pop();
-                  }),
-            ],
-          );
-        });
+          ],
+        );
+      },
+    );
     if (winner == 'o') {
-      setState(() {
-        _soundWinner();
-        pointsO += 1;
-      });
+      setState(
+        () {
+          _soundWinner();
+          pointsO += 1;
+        },
+      );
     } else if (winner == 'x') {
-      setState(() {
-        _soundWinner();
-        pointsX += 1;
-      });
+      setState(
+        () {
+          _soundWinner();
+          pointsX += 1;
+        },
+      );
     }
   }
 
   void _clearBoard() {
-    setState(() {
-      for (int i = 0; i < 9; i++) {
-        displayXo[i] = '';
-      }
-      filledBoxes = 0;
-    });
+    setState(
+      () {
+        for (int i = 0; i < 9; i++) {
+          displayXo[i] = '';
+        }
+        filledBoxes = 0;
+      },
+    );
   }
 
   void _showDrawDialog() {
     showDialog<AlertDialog>(
-        barrierDismissible: false,
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: Text(
-              'It\'s a tie',
-              style: _myNewFont1,
+      barrierDismissible: false,
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text(
+            'It\'s a tie',
+            style: _myNewFont1,
+          ),
+          actions: <Widget>[
+            FlatButton(
+              child: Text(
+                'Play Again',
+                style: _myNewFont,
+              ),
+              onPressed: () {
+                _clearBoard();
+                Navigator.of(context).pop();
+              },
             ),
-            actions: <Widget>[
-              FlatButton(
-                  child: Text(
-                    'Play Again',
-                    style: _myNewFont,
-                  ),
-                  onPressed: () {
-                    _clearBoard();
-                    Navigator.of(context).pop();
-                  }),
-            ],
-          );
-        });
+          ],
+        );
+      },
+    );
   }
 
   void _soundWinner() {
@@ -311,10 +311,12 @@ class _HomePageState extends State<HomePage> {
               GestureDetector(
                 onTap: () {
                   if (pointsO != 0 || pointsX != 0) {
-                    setState(() {
-                      pointsX = 0;
-                      pointsO = 0;
-                    });
+                    setState(
+                      () {
+                        pointsX = 0;
+                        pointsO = 0;
+                      },
+                    );
                   }
                 },
                 child: Padding(
@@ -336,12 +338,12 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               GestureDetector(
-                onTap: () {
-                  _clearBoard();
-                },
+                onTap: () => _clearBoard(),
                 child: Padding(
-                  padding: const EdgeInsets.only(
-                      left: 8, right: 8, bottom: 32, top: 32),
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 8,
+                    horizontal: 32,
+                  ),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(8),
                     child: Container(
@@ -366,8 +368,10 @@ class _HomePageState extends State<HomePage> {
                   );
                 },
                 child: Padding(
-                  padding: const EdgeInsets.only(
-                      left: 8, right: 8, bottom: 32, top: 32),
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 8,
+                    horizontal: 32,
+                  ),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(8),
                     child: Container(
