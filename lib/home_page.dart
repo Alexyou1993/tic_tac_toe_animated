@@ -207,7 +207,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[900],
+      backgroundColor: Colors.grey.shade900,
       body: SingleChildScrollView(
         child: SizedBox(
           height: 1000,
@@ -268,9 +268,7 @@ class _HomePageState extends State<HomePage> {
                   physics: const NeverScrollableScrollPhysics(),
                   itemBuilder: (BuildContext context, int index) {
                     return GestureDetector(
-                      onTap: () {
-                        _tapped(index);
-                      },
+                      onTap: () => _tapped(index),
                       child: Container(
                         decoration: BoxDecoration(
                             border: Border.all(color: Colors.grey[700])),
@@ -310,18 +308,19 @@ class _HomePageState extends State<HomePage> {
               ),
               GestureDetector(
                 onTap: () {
-                  if (pointsO != 0 || pointsX != 0) {
+                  if (pointsO != 0 || pointsX != 0)
                     setState(
                       () {
                         pointsX = 0;
                         pointsO = 0;
                       },
                     );
-                  }
                 },
                 child: Padding(
-                  padding: const EdgeInsets.only(
-                      left: 8, right: 8, bottom: 32, top: 32),
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 8,
+                    horizontal: 32,
+                  ),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(8),
                     child: Container(
